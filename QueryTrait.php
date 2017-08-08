@@ -178,18 +178,18 @@ trait QueryTrait
                     $qb->select($value);
                     break;
                 case 'from':
-                    if (1 != count($value)):
-                        0/0; // TODO
+                    if (1 !== count($value)):
+                        0 / 0; // TODO
                     endif;
                     $qb->from(array_keys($value)[0], array_values($value)[0]);
                     break;
                 case 'where':
-                    0/0; // TODO
+                    0 / 0; // TODO
                     break;
                 case 'join':
                 case 'innerJoin':
                     foreach ($value as    $key => $jvalue) {
-                        if (1 != count($jvalue['table'])) {
+                        if (1 !== count($jvalue['table'])) {
                             0 / 0; // TODO
                         }
                         // dump          ($jvalue['from'], array_keys($jvalue['table'])[0], array_values($jvalue['table'])[0], $jvalue['on']);
@@ -208,7 +208,7 @@ trait QueryTrait
         $distant_id, $distant_table, array $where)
     {
         $qb = $this->getConnection()->createQueryBuilder(); // 210
-        if (false): // ----------------------------------------------------
+        if (false) { // ----------------------------------------------------
             $qa0 = [
                 'select' => 'base.*',
                 'from' => [
@@ -275,7 +275,7 @@ trait QueryTrait
             // TODO: make it constant (maybe for php7)
             // http://php.net/manual/en/language.constants.syntax.php
             // http://php.net/manual/en/language.oop5.constants.php    Class Constants
-        endif;
+        }
         $result = $this->sqlarray2dbal([
                 'select' => 'base.*',
                 'from' => [
