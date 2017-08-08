@@ -170,7 +170,7 @@ trait QueryTrait
         // $qb = $this->getConnection()->createQueryBuilder();
         // $qb = $conn->createQueryBuilder();
         // dump($sqlTree);
-        foreach ($sqlTree as $key => $value):
+        foreach ($sqlTree as $key => $value) {
             /// dump($key, $value);
             switch ($key) {
                 case 'select':
@@ -198,7 +198,7 @@ trait QueryTrait
                 // default:
                     // echo "i n'est ni égal à 2, ni à 1, ni à 0";
             }
-        endforeach;
+        }
         return $qb;
     }
 
