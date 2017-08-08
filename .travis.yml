@@ -44,6 +44,7 @@ before_script:
 
 script:
   - php -l *.php
+  - for f in $(find . -name \*.php) ; do php -l $f ; done
   # - ./vendor/bin/simple-phpunit
   # this checks that the source code follows the Symfony Code Syntax rules
   - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then ./vendor/bin/php-cs-fixer fix --stop-on-violation --diff --dry-run -vvv --using-cache=no; fi
