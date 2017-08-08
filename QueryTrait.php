@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Doctrine DBAL Util package.
+ *
+ * (c) Jean-Bernard Addor
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace DoctrineDbalUtil\Connection;
 
 
@@ -68,22 +77,24 @@ trait QueryTrait
                 return $row;
             endwhile;
         else:
-            die('tbS8k: ' . basename(__FILE__)); // TODO
+            die('tbS8k: '.basename(__FILE__)); // TODO
         endif;
-        return; // TODO: check if something should be ended or close...
+        // TODO: check if something should be ended or close...
     }
 
-    public function insert($table, array $insert) { // TODO: (SECURITY) assert $insert is an array DONE
+    public function insert($table, array $insert)
+    { // TODO: (SECURITY) assert $insert is an array DONE
         $this->getConnection()->insert($table, $insert);
         // The construct with the array triggers a prepared statement
     }
 
-/*
+    /*
     public function insert_default_values($table) {
         $this->getConnection()->executeUpdate('INSERT INTO ' . $table . ' DEFAULT VALUES');
     }
-*/
-    public function lastInsertId(string $seqName = null) { // used?
+    */
+    public function lastInsertId(string $seqName = null)
+    { // used?
         $this->getConnection()->lastInsertId($seqName);
     }
 
@@ -92,7 +103,8 @@ trait QueryTrait
         return $this->updateByUnique($table, $id, $row, $types);
     }
     
-    public function updateByUnique($table, array $id, array $row, array $types = []) { // TODO: assert unicity of index
+    public function updateByUnique($table, array $id, array $row, array $types = [])
+    { // TODO: assert unicity of index
         $qb = $this->getConnection()->createQueryBuilder();
         $qb->update($table)->where(call_user_func_array([$qb->expr(), 'andX'],
             array_map(
@@ -112,7 +124,8 @@ trait QueryTrait
         $qb->execute();
     }
 
-    public function deleteByUnique($table, array $id) { // TODO: assert unicity of index
+    public function deleteByUnique($table, array $id)
+    { // TODO: assert unicity of index
         $qb = $this->getConnection()->createQueryBuilder();
         $qb
             ->delete($table)
@@ -135,13 +148,13 @@ trait QueryTrait
             ->select('d.*', 'l.*') // TODO: name collision RISK: seems to that data with same column name is taken from second (may be not reliable)
             // ->select('d.*') // TODO: name collision RISK: seems to that data with same column name is taken from second (may be not reliable): to try...
             ->from($base_table, 'b')
-            ->innerJoin('b', $link_table, 'l', 'b.' . $base_id . ' = l.' . $link_base_id)
-            ->innerJoin('l', $distant_table, 'd', 'l.' . $link_distant_id . ' = d.'. $distant_id)
-            // ->where('b.id = '. $queryBuilder->createPositionalParameter($id))
+            ->innerJoin('b', $link_table, 'l', 'b.'.$base_id.' = l.'.$link_base_id)
+            ->innerJoin('l', $distant_table, 'd', 'l.'.$link_distant_id.' = d.'.$distant_id)
+            // ->where('b.id = '.$queryBuilder->createPositionalParameter($id))
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function($s) {return 'b.' . $s;}, array_keys($unique)),
+                    array_map(function($s) {return 'b.'.$s;}, array_keys($unique)),
                     array_map([$qb, 'createNamedParameter'], array_values($unique))
                 )
             ))
@@ -155,7 +168,7 @@ trait QueryTrait
         // $qb = $this->getConnection()->createQueryBuilder();
         // $qb = $conn->createQueryBuilder();
         // dump($sqlTree);
-        foreach ($sqlTree as    $key => $value):
+        foreach ($sqlTree as $key => $value):
             /// dump($key, $value);
             switch ($key):
                 case "select":
@@ -203,8 +216,8 @@ trait QueryTrait
                 'where' => [
                     'and' => [
                         '=' => [
-                            'base.' . $base_id,
-                            'link.' . $link_base_id
+                            'base.'.$base_id,
+                            'link.'.$link_base_id
                         ],
                         '<' => [1, 2],
                     ],
@@ -221,8 +234,8 @@ trait QueryTrait
                             'table' => [$link_table => 'link'],
                             'on' => [
                                 '=' => [
-                                    'base.' . $base_id,
-                                    'link.' . $link_base_id
+                                    'base.'.$base_id,
+                                    'link.'.$link_base_id
                                 ]
                             ]
                         ],
@@ -233,8 +246,8 @@ trait QueryTrait
                         'table' => [$link_table => 'link'],
                         'on' => [
                             '=' => [
-                                'base.' . $base_id,
-                                'link.' . $link_base_id
+                                'base.'.$base_id,
+                                'link.'.$link_base_id
                             ]
                         ]
                     ],
@@ -244,8 +257,8 @@ trait QueryTrait
                     'table' => [$link_table => 'link'],
                     'on' => [
                         '=' => [
-                            'base.' . $base_id,
-                            'link.' . $link_base_id
+                            'base.'.$base_id,
+                            'link.'.$link_base_id
                         ]
                     ]
                 ],
@@ -270,12 +283,12 @@ trait QueryTrait
                     [
                         'from'  => 'base',
                         'table' => [$link_table => 'link'],
-                        'on'    => 'base."' . $base_id . '" = link."' . $link_base_id . '"'
+                        'on'    => 'base."'.$base_id.'" = link."'.$link_base_id.'"'
                     ],
                     [
                         'from'  => 'link',
                         'table' => [$distant_table => 'distant'],
-                        'on'    => 'link."' . $link_distant_id . '" = distant."'. $distant_id . '"'
+                        'on'    => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
                     ]
                 ],
             ], $qb)
@@ -286,7 +299,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function($s) {return 'distant.' . $s;}, array_keys($where)),
+                    array_map(function($s) {return 'distant.'.$s;}, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
@@ -305,15 +318,15 @@ trait QueryTrait
     {
         $qb = $this->getConnection()->createQueryBuilder();
         $result = $qb
-            ->select('distant.*, base."' . $base_id . '" as base_link_id, base_link."' . $base_link_distant_id . '" as distant_link_id')
+            ->select('distant.*, base."'.$base_id.'" as base_link_id, base_link."'.$base_link_distant_id.'" as distant_link_id')
             ->from($base_table, 'base')
-            ->innerJoin('base', '"' . $base_link_table . '"', 'base_link', 'base."' . $base_id . '" = base_link."' . $base_link_base_id . '"')
-            ->innerJoin('base_link', '"' . $distant_link_table . '"', 'distant_link', 'base_link."' . $base_link_distant_id . '" = distant_link."' . $distant_link_base_id . '"')
-            ->innerJoin('distant_link', '"' . $distant_table . '"', 'distant', 'distant_link."' . $distant_link_distant_id . '" = distant."'. $distant_id . '"')
+            ->innerJoin('base', '"'.$base_link_table.'"', 'base_link', 'base."'.$base_id.'" = base_link."'.$base_link_base_id.'"')
+            ->innerJoin('base_link', '"'.$distant_link_table.'"', 'distant_link', 'base_link."'.$base_link_distant_id.'" = distant_link."'.$distant_link_base_id.'"')
+            ->innerJoin('distant_link', '"'.$distant_table.'"', 'distant', 'distant_link."'.$distant_link_distant_id.'" = distant."'.$distant_id.'"')
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function($s) {return 'base.' . $s;}, array_keys($where)),
+                    array_map(function($s) {return 'base.'.$s;}, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ));
@@ -329,13 +342,13 @@ trait QueryTrait
         return $qb
             ->select('more.*, base.*') // collision risk
             ->from($base_table, 'base')
-            ->innerJoin('base', '"' . $more_table . '"', 'more', 'base."' . $base_more . '" = more."' . $more_id . '"')
-            ->innerJoin('base', '"' . $link_table . '"', 'link', 'base."' . $base_id . '" = link."' . $link_base_id . '"')
-            ->innerJoin('link', '"' . $distant_table . '"', 'distant', 'link."' . $link_distant_id . '" = distant."'. $distant_id . '"')
+            ->innerJoin('base', '"'.$more_table.'"', 'more', 'base."'.$base_more.'" = more."'.$more_id.'"')
+            ->innerJoin('base', '"'.$link_table.'"', 'link', 'base."'.$base_id.'" = link."'.$link_base_id.'"')
+            ->innerJoin('link', '"'.$distant_table.'"', 'distant', 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"')
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function($s) {return 'distant.' . $s;}, array_keys($where)),
+                    array_map(function($s) {return 'distant.'.$s;}, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
@@ -358,17 +371,17 @@ trait QueryTrait
                     [
                         'from'  => 'base',
                         'table' => [$more_table => 'more'],
-                        'on'    => 'base."' . $base_more . '" = more."' . $more_id . '"'
+                        'on'    => 'base."'.$base_more.'" = more."'.$more_id.'"'
                     ],
                     [
                         'from'  => 'base',
                         'table' => [$link_table => 'link'],
-                        'on'    => 'base."' . $base_id . '" = link."' . $link_base_id . '"'
+                        'on'    => 'base."'.$base_id.'" = link."'.$link_base_id.'"'
                     ],
                     [
                         'from'  => 'link',
                         'table' => [$distant_table => 'distant'],
-                        'on'    => 'link."' . $link_distant_id . '" = distant."'. $distant_id . '"'
+                        'on'    => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
                     ]
                 ],
             ], $qb)
@@ -378,11 +391,11 @@ trait QueryTrait
             // ->innerJoin('base', '"' . $more_table . '"', 'more', 'base."' . $base_more . '" = more."' . $more_id . '"')
             // ->innerJoin('base', '"' . $link_table . '"', 'link', 'base."' . $base_id . '" = link."' . $link_base_id . '"')
             // ->innerJoin('link', '"' . $distant_table . '"', 'distant', 'link."' . $link_distant_id . '" = distant."'. $distant_id . '"')
-            ->leftJoin('base', '"' . 'link_owned_url_taxonomy' . '"', 'taxo', 'base."' . $base_id . '" = taxo."'. 'owned_url_uuid' . '"')
+            ->leftJoin('base', '"'.'link_owned_url_taxonomy'.'"', 'taxo', 'base."'.$base_id.'" = taxo."'.'owned_url_uuid'.'"')
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_merge([],array_map(function($s) {return 'distant.' . $s;}, array_keys($where))),
+                    array_merge([],array_map(function($s) {return 'distant.'.$s;}, array_keys($where))),
                     array_merge([],array_map([$qb, 'createNamedParameter'], array_values($where)))
                 )
             ))
