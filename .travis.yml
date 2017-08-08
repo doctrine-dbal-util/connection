@@ -39,6 +39,7 @@ install:
   # - composer up --no-progress --no-suggest --optimize-autoloader --apcu-autoloader
   - composer install --no-progress --no-suggest --optimize-autoloader --apcu-autoloader
   - composer show
+  - for f in $(find ./vendor -name \*.php) ; do php -l $f > /dev/null ; done
 
 before_script:
 
