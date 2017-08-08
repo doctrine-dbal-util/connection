@@ -25,8 +25,8 @@ trait QueryTrait
             ->from($table)
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
-                    [$qb->expr(), 'eq'], // tag
-                    array_keys($where), 
+                    [$qb->expr(), 'eq'],
+                    array_keys($where),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
@@ -66,8 +66,8 @@ trait QueryTrait
             ->from($table)
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
-                    [$qb->expr(), 'eq'], 
-                    array_keys($where), 
+                    [$qb->expr(), 'eq'],
+                    array_keys($where),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
@@ -109,8 +109,8 @@ trait QueryTrait
         $qb = $this->getConnection()->createQueryBuilder();
         $qb->update($table)->where(call_user_func_array([$qb->expr(), 'andX'],
             array_map(
-                [$qb->expr(), 'eq'], 
-                array_keys($id), 
+                [$qb->expr(), 'eq'],
+                array_keys($id),
                 array_map([$qb, 'createNamedParameter'], array_values($id))
             )
         ));
@@ -132,8 +132,8 @@ trait QueryTrait
             ->delete($table)
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
-                    [$qb->expr(), 'eq'], 
-                    array_keys($id), 
+                    [$qb->expr(), 'eq'],
+                    array_keys($id),
                     array_map([$qb, 'createNamedParameter'], array_values($id))
                 )
             ))
@@ -154,7 +154,7 @@ trait QueryTrait
             // ->where('b.id = '.$queryBuilder->createPositionalParameter($id))
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
-                    [$qb->expr(), 'eq'], 
+                    [$qb->expr(), 'eq'],
                     array_map(function ($s) {return 'b.'.$s; }, array_keys($unique)),
                     array_map([$qb, 'createNamedParameter'], array_values($unique))
                 )
@@ -298,7 +298,7 @@ trait QueryTrait
             // ->innerJoin('link', '"' . $distant_table . '"', 'distant', 'link."' . $link_distant_id . '" = distant."'. $distant_id . '"')
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
-                    [$qb->expr(), 'eq'], 
+                    [$qb->expr(), 'eq'],
                     array_map(function ($s) {return 'distant.'.$s; }, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
@@ -324,7 +324,7 @@ trait QueryTrait
             ->innerJoin('distant_link', '"'.$distant_table.'"', 'distant', 'distant_link."'.$distant_link_distant_id.'" = distant."'.$distant_id.'"')
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
-                    [$qb->expr(), 'eq'], 
+                    [$qb->expr(), 'eq'],
                     array_map(function ($s) {return 'base.'.$s; }, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
@@ -346,7 +346,7 @@ trait QueryTrait
             ->innerJoin('link', '"'.$distant_table.'"', 'distant', 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"')
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
-                    [$qb->expr(), 'eq'], 
+                    [$qb->expr(), 'eq'],
                     array_map(function ($s) {return 'distant.'.$s; }, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
@@ -393,7 +393,7 @@ trait QueryTrait
             ->leftJoin('base', '"'.'link_owned_url_taxonomy'.'"', 'taxo', 'base."'.$base_id.'" = taxo."'.'owned_url_uuid'.'"')
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
-                    [$qb->expr(), 'eq'], 
+                    [$qb->expr(), 'eq'],
                     array_merge([], array_map(function ($s) {return 'distant.'.$s; }, array_keys($where))),
                     array_merge([], array_map([$qb, 'createNamedParameter'], array_values($where)))
                 )
