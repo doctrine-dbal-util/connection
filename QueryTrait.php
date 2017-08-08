@@ -314,8 +314,7 @@ trait QueryTrait
         $distant_id, $distant_table,
         array $where // ,
         // $orderby=''
-        )
-    {
+        ) {
         $qb = $this->getConnection()->createQueryBuilder();
         $result = $qb
             ->select('distant.*, base."'.$base_id.'" as base_link_id, base_link."'.$base_link_distant_id.'" as distant_link_id')
@@ -371,17 +370,17 @@ trait QueryTrait
                     [
                         'from' => 'base',
                         'table' => [$more_table => 'more'],
-                        'on' => 'base."'.$base_more.'" = more."'.$more_id.'"'
+                        'on' => 'base."'.$base_more.'" = more."'.$more_id.'"',
                     ],
                     [
                         'from' => 'base',
                         'table' => [$link_table => 'link'],
-                        'on' => 'base."'.$base_id.'" = link."'.$link_base_id.'"'
+                        'on' => 'base."'.$base_id.'" = link."'.$link_base_id.'"',
                     ],
                     [
                         'from' => 'link',
                         'table' => [$distant_table => 'distant'],
-                        'on' => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
+                        'on' => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"',
                     ],
                 ],
             ], $qb)
@@ -395,8 +394,8 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_merge([],array_map(function ($s) {return 'distant.'.$s; }, array_keys($where))),
-                    array_merge([],array_map([$qb, 'createNamedParameter'], array_values($where)))
+                    array_merge([], array_map(function ($s) {return 'distant.'.$s; }, array_keys($where))),
+                    array_merge([], array_map([$qb, 'createNamedParameter'], array_values($where)))
                 )
             ))
             // ->orderBy('taxocount', 'ASC')
