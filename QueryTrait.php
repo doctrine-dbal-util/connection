@@ -1,6 +1,6 @@
 <?php
 
-namespace DbalUtil\Connection;
+namespace DoctrineDbalUtil\Connection;
 
 
 trait QueryTrait
