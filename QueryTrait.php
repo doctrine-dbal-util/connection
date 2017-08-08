@@ -115,11 +115,11 @@ trait QueryTrait
             )
         ));
         foreach ($row as $key => $value):
-            $qb->set($key, ':' . $key);
+            $qb->set($key, ':'.$key);
             if (array_key_exists($key, $types)) :
-                $qb->setParameter(':' . $key, $value, $types[$key]);
+                $qb->setParameter(':'.$key, $value, $types[$key]);
             else :
-                $qb->setParameter(':' . $key, $value);
+                $qb->setParameter(':'.$key, $value);
             endif;
         endforeach;
         $qb->execute();
@@ -236,8 +236,8 @@ trait QueryTrait
                                 '=' => [
                                     'base.'.$base_id,
                                     'link.'.$link_base_id,
-                                ]
-                            ]
+                                ],
+                            ],
                         ],
                     ],
                 ],
@@ -248,8 +248,8 @@ trait QueryTrait
                             '=' => [
                                 'base.'.$base_id,
                                 'link.'.$link_base_id,
-                            ]
-                        ]
+                            ],
+                        ],
                     ],
                 ],
                 'innerJoin' => [
@@ -259,8 +259,8 @@ trait QueryTrait
                         '=' => [
                             'base.'.$base_id,
                             'link.'.$link_base_id,
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
                 'where' => [
                     'and' => [
@@ -283,13 +283,13 @@ trait QueryTrait
                     [
                         'from' => 'base',
                         'table' => [$link_table => 'link'],
-                        'on' => 'base."'.$base_id.'" = link."'.$link_base_id.'"'
+                        'on' => 'base."'.$base_id.'" = link."'.$link_base_id.'"',
                     ],
                     [
                         'from' => 'link',
                         'table' => [$distant_table => 'distant'],
-                        'on' => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
-                    ]
+                        'on' => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"',
+                    ],
                 ],
             ], $qb)
             // ->select('base.*')
@@ -382,7 +382,7 @@ trait QueryTrait
                         'from' => 'link',
                         'table' => [$distant_table => 'distant'],
                         'on' => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
-                    ]
+                    ],
                 ],
             ], $qb)
             // ->select('more.*, base.*, count(base.uuid=taxo.owned_url_uuid) AS taxocount') // collision risk!
