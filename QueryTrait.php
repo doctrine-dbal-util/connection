@@ -72,13 +72,20 @@ trait QueryTrait
                 )
             ))
             ->execute();
-        if ($stmt->execute()) {
+        ///////////////////////////////////////////////////////////////////////////////////
+        // if ($stmt->execute()) {
+            /*
             while ($row = $stmt->fetch()) {
                 return $row;
             } // endwhile
-        } else {
+            */
+        // } 
+        /*
+        else
+        {
             die('tbS8k: '.basename(__FILE__)); // TODO
         } // endif
+        */
         // TODO: check if something should be ended or close...
     }
 
