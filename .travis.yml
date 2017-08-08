@@ -43,7 +43,7 @@ install:
 before_script:
 
 script:
-  - php -l QueryTrait.php
+  - php -l *.php
   # - ./vendor/bin/simple-phpunit
   # this checks that the source code follows the Symfony Code Syntax rules
   - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then ./vendor/bin/php-cs-fixer fix --stop-on-violation --diff --dry-run -vvv --using-cache=no; fi
