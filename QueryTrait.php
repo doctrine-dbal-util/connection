@@ -24,7 +24,9 @@ trait QueryTrait
             ->select('*')
             ->from($table)
             ->where(call_user_func_array([$qb->expr(), 'andX'],
-                array_map([$qb->expr(),'eq',],array_keys($where), 
+                array_map(
+                    [$qb->expr(), 'eq'], // tag
+                    array_keys($where), 
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
