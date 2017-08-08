@@ -61,6 +61,7 @@ trait QueryTrait
     public function getByUnique($table, array $where)
     {
         $qb = $this->getConnection()->createQueryBuilder();
+
         $stmt = $qb
             ->select('*')
             ->from($table)
@@ -106,7 +107,7 @@ trait QueryTrait
 
     public function updateByUnique($table, array $id, array $row, array $types = [])
     { // TODO: assert unicity of index
-        $qb = $this->getConnection()->createQueryBuilder();
+        $qb = $this->getConnection()->createQueryBuilder(); // 110
         $qb->update($table)->where(call_user_func_array([$qb->expr(), 'andX'],
             array_map(
                 [$qb->expr(), 'eq'],
@@ -145,7 +146,7 @@ trait QueryTrait
     public function getManyToManyTraversable($base_table, $base_id, $link_base_id, $link_table, $link_distant_id, $distant_id, $distant_table, array $unique)
     // url/show
     {
-        $qb = $this->getConnection()->createQueryBuilder();
+        $qb = $this->getConnection()->createQueryBuilder(); // 149
         return $qb
             ->select('d.*', 'l.*') // TODO: name collision RISK: seems to that data with same column name is taken from second (may be not reliable)
             // ->select('d.*') // TODO: name collision RISK: seems to that data with same column name is taken from second (may be not reliable): to try...
@@ -189,7 +190,7 @@ trait QueryTrait
                 case 'innerJoin':
                     foreach ($value as    $key => $jvalue) {
                         if (1 != count($jvalue['table'])) {
-                            0/0; // TODO
+                            0 / 0; // TODO
                         }
                         // dump          ($jvalue['from'], array_keys($jvalue['table'])[0], array_values($jvalue['table'])[0], $jvalue['on']);
                         $qb->innerJoin($jvalue['from'], array_keys($jvalue['table'])[0], array_values($jvalue['table'])[0], $jvalue['on']);
@@ -206,7 +207,7 @@ trait QueryTrait
         $link_base_id, $link_table, $link_distant_id,
         $distant_id, $distant_table, array $where)
     {
-        $qb = $this->getConnection()->createQueryBuilder();
+        $qb = $this->getConnection()->createQueryBuilder(); // 210
         if (false): // ----------------------------------------------------
             $qa0 = [
                 'select' => 'base.*',
@@ -316,7 +317,7 @@ trait QueryTrait
         array $where // ,
         // $orderby=''
         ) {
-        $qb = $this->getConnection()->createQueryBuilder();
+        $qb = $this->getConnection()->createQueryBuilder(); // 320
         $result = $qb
             ->select('distant.*, base."'.$base_id.'" as base_link_id, base_link."'.$base_link_distant_id.'" as distant_link_id')
             ->from($base_table, 'base')
@@ -338,7 +339,7 @@ trait QueryTrait
 
     public function getMoreManyToManyWhereQueryBuilder($more_table, $more_id, $base_more, $base_table, $base_id, $link_base_id, $link_table, $link_distant_id, $distant_id, $distant_table, array $where)
     {
-        $qb = $this->getConnection()->createQueryBuilder();
+        $qb = $this->getConnection()->createQueryBuilder(); // 342
         return $qb
             ->select('more.*, base.*') // collision risk
             ->from($base_table, 'base')
@@ -360,7 +361,7 @@ trait QueryTrait
         $link_base_id, $link_table, $link_distant_id,
         $distant_id, $distant_table, array $where)
     {
-        $qb = $this->getConnection()->createQueryBuilder();
+        $qb = $this->getConnection()->createQueryBuilder(); // 364
         // return $qb
         return $this->sqlarray2dbal([
                 'select' => 'more.*, base.*',
