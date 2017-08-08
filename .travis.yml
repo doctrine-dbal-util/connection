@@ -45,7 +45,7 @@ before_script:
 script:
   # - php -l *.php
   # - for f in $(find . -name \*.php) ; do php -l $f ; done
-  - find . -path './vendor' -prune -o -name \*.php -print
+  # - find . -path './vendor' -prune -o -name \*.php -print
   - for f in $(find . -path './vendor' -prune -o -name \*.php -print) ; do php -l $f ; done
   # - ./vendor/bin/simple-phpunit
   # this checks that the source code follows the Symfony Code Syntax rules
