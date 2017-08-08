@@ -75,10 +75,10 @@ trait QueryTrait
         if ($stmt->execute()) {
             while ($row = $stmt->fetch()) {
                 return $row;
-            }; // endwhile
+            } // endwhile
         } else {
             die('tbS8k: '.basename(__FILE__)); // TODO
-        }; // endif
+        } // endif
         // TODO: check if something should be ended or close...
     }
 
