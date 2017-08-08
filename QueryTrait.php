@@ -166,7 +166,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function ($s) {return 'b.'.$s;}, array_keys($unique)),
+                    array_map(function ($s) {return 'b.'.$s; }, array_keys($unique)),
                     array_map([$qb, 'createNamedParameter'], array_values($unique))
                 )
             ))
@@ -312,7 +312,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function ($s) {return 'distant.'.$s;}, array_keys($where)),
+                    array_map(function ($s) {return 'distant.'.$s; }, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
@@ -340,7 +340,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function ($s) {return 'base.'.$s;}, array_keys($where)),
+                    array_map(function ($s) {return 'base.'.$s; }, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ));
@@ -363,7 +363,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function ($s) {return 'distant.'.$s;}, array_keys($where)),
+                    array_map(function ($s) {return 'distant.'.$s; }, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
@@ -411,7 +411,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_merge([],array_map(function ($s) {return 'distant.'.$s;}, array_keys($where))),
+                    array_merge([],array_map(function ($s) {return 'distant.'.$s; }, array_keys($where))),
                     array_merge([],array_map([$qb, 'createNamedParameter'], array_values($where)))
                 )
             ))
