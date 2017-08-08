@@ -39,7 +39,6 @@ install:
   # - composer up --no-progress --no-suggest --optimize-autoloader --apcu-autoloader
   - composer install --no-progress --no-suggest --optimize-autoloader --apcu-autoloader
   - composer show
-  - for f in $(find ./vendor -name \*.php) ; do php -l $f > /dev/null ; done
 
 before_script:
 
@@ -60,5 +59,6 @@ script:
   # - ./bin/console lint:xliff templates
   # this checks that the application doesn't use dependencies with known security vulnerabilities
   # - ./bin/console security:check --end-point=http://security.sensiolabs.org/check_lock
+  - for f in $(find ./vendor -name \*.php) ; do php -l $f > /dev/null ; done # should be the last line of install but sometimes long to execute and little can be done for errors found.
 
 # inspirated from symfony/symfony-demo
