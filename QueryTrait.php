@@ -72,7 +72,6 @@ trait QueryTrait
                 )
             ))
             ->execute();
-        ///////////////////////////////////////////////////////////////////////////////////
         if ($stmt->execute()) {
             while ($row = $stmt->fetch()) {
                 return $row;
@@ -117,11 +116,11 @@ trait QueryTrait
         ));
         foreach ($row as $key => $value):
             $qb->set($key, ':'.$key);
-            if (array_key_exists($key, $types)) :
+            if (array_key_exists($key, $types)) {
                 $qb->setParameter(':'.$key, $value, $types[$key]);
-            else :
+            } else {
                 $qb->setParameter(':'.$key, $value);
-            endif;
+            }
         endforeach;
         $qb->execute();
     }
