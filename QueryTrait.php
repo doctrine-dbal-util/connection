@@ -80,8 +80,7 @@ trait QueryTrait
         } else {
             die('tbS8k: '.basename(__FILE__));
             // TODO
-        }
-        // endif
+        } // if
         // TODO: check if something should be ended or close...
     }
 
