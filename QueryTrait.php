@@ -187,13 +187,13 @@ trait QueryTrait
                     break;
                 case 'join':
                 case 'innerJoin':
-                    foreach ($value as    $key => $jvalue):
+                    foreach ($value as    $key => $jvalue) {
                         if (1 != count($jvalue['table'])) {
                             0/0; // TODO
                         }
                         // dump          ($jvalue['from'], array_keys($jvalue['table'])[0], array_values($jvalue['table'])[0], $jvalue['on']);
                         $qb->innerJoin($jvalue['from'], array_keys($jvalue['table'])[0], array_values($jvalue['table'])[0], $jvalue['on']);
-                    endforeach;
+                    }
                     break;
                 // default:
                     // echo "i n'est ni égal à 2, ni à 1, ni à 0";
