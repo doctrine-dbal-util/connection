@@ -73,13 +73,13 @@ trait QueryTrait
             ))
             ->execute();
         ///////////////////////////////////////////////////////////////////////////////////
-        // if ($stmt->execute()) {
+        if ($stmt->execute()) {
             
             while ($row = $stmt->fetch()) {
                 return $row;
             } // endwhile
             
-        // } 
+        } 
         /*
         else
         {
