@@ -11,7 +11,6 @@
 
 namespace DoctrineDbalUtil\Connection;
 
-
 trait QueryTrait
 {
     use ConnectionAbstractTrait;
@@ -20,6 +19,7 @@ trait QueryTrait
     // url/show
     {
         $qb = $this->getConnection()->createQueryBuilder();
+
         return $qb
             ->select('*')
             ->from($table)
@@ -34,30 +34,35 @@ trait QueryTrait
         // TODO: check if $stmt should be ->execute() like in getByUnique
     }
 
+    
     public function findUniqueBy($table, array $where)
     {
         return $this->getByUnique($table, $where);
     }
     // should check for unicity
 
+    
     public function findFirstBy($table, array $where)
     {
         return $this->getByUnique($table, $where);
     }
     // return first result
 
+    
     public function findOneBy($table, array $where)
     {
         return $this->getByUnique($table, $where);
     }
     // not clear, should return first result
 
+    
     public function find($table, array $where)
     {
         return $this->getByUnique($table, $where);
     }
     // should search by id
 
+    
     public function getByUnique($table, array $where)
     {
         $qb = $this->getConnection()->createQueryBuilder();
@@ -82,26 +87,31 @@ trait QueryTrait
         // TODO: check if something should be ended or close...
     }
 
+    
     public function insert($table, array $insert)
     { // TODO: (SECURITY) assert $insert is an array DONE
         $this->getConnection()->insert($table, $insert);
         // The construct with the array triggers a prepared statement
     }
 
+    
     /*
     public function insert_default_values($table) {
         $this->getConnection()->executeUpdate('INSERT INTO ' . $table . ' DEFAULT VALUES');
     }
     */
+
     public function lastInsertId(string $seqName = null)
     { // used?
         $this->getConnection()->lastInsertId($seqName);
     }
 
+    
     public function updateUniqueBy($table, array $id, array $row, array $types = [])
     {
         return $this->updateByUnique($table, $id, $row, $types);
     }
+    
     
     public function updateByUnique($table, array $id, array $row, array $types = [])
     { // TODO: assert unicity of index
@@ -124,6 +134,7 @@ trait QueryTrait
         $qb->execute();
     }
 
+    
     public function deleteByUnique($table, array $id)
     { // TODO: assert unicity of index
         $qb = $this->getConnection()->createQueryBuilder();
@@ -140,6 +151,7 @@ trait QueryTrait
         ;
     }
 
+    
     public function getManyToManyTraversable($base_table, $base_id, $link_base_id, $link_table, $link_distant_id, $distant_id, $distant_table, array $unique)
     // url/show
     {
@@ -162,6 +174,7 @@ trait QueryTrait
         ;
     }
 
+    
     public function sqlarray2dbal(array $sqlTree, $qb)
     {
         // $conn = $this->getConnection();
@@ -307,6 +320,7 @@ trait QueryTrait
         return $result;
     }
 
+    
     public function getWhereManyToManyToManyQueryBuilder(
         $base_table, $base_id, // $t0, $t0_id,...
         $base_link_base_id, $base_link_table, $base_link_distant_id,
@@ -336,6 +350,7 @@ trait QueryTrait
         return $result;
     }
 
+    
     public function getMoreManyToManyWhereQueryBuilder($more_table, $more_id, $base_more, $base_table, $base_id, $link_base_id, $link_table, $link_distant_id, $distant_id, $distant_table, array $where)
     {
         $qb = $this->getConnection()->createQueryBuilder();
@@ -355,6 +370,7 @@ trait QueryTrait
         ;
     }
 
+    
     public function getUrlIndexQueryBuilder($more_table, $more_id,
         $base_more, $base_table, $base_id,
         $link_base_id, $link_table, $link_distant_id,
