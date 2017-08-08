@@ -79,10 +79,7 @@ trait QueryTrait
                 return $row;
             } // endwhile
             
-        } 
-        
-        else
-        {
+        } else {
             die('tbS8k: '.basename(__FILE__));
             // TODO
         }
