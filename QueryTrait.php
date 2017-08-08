@@ -122,7 +122,7 @@ trait QueryTrait
             } else {
                 $qb->setParameter(':'.$key, $value);
             }
-        }
+        } // 125
         $qb->execute();
     }
 
@@ -199,7 +199,7 @@ trait QueryTrait
                 // default:
                     // echo "i n'est ni égal à 2, ni à 1, ni à 0";
             }
-        }
+        } // 202
         return $qb;
     }
 
@@ -275,7 +275,7 @@ trait QueryTrait
             // TODO: make it constant (maybe for php7)
             // http://php.net/manual/en/language.constants.syntax.php
             // http://php.net/manual/en/language.oop5.constants.php    Class Constants
-        }
+        } // 278
         $result = $this->sqlarray2dbal([
                 'select' => 'base.*',
                 'from' => [
@@ -306,6 +306,7 @@ trait QueryTrait
                 )
             ))
         ;
+
         return $result;
     }
 
