@@ -24,17 +24,12 @@ trait QueryTrait
             ->select('*')
             ->from($table)
             ->where(call_user_func_array([$qb->expr(), 'andX'],
-                array_map(
-                    [
-                        $qb->expr(), 
-                        'eq',
-                    ], 
-                    array_keys($where), 
+                array_map([$qb->expr(),'eq',],array_keys($where), 
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
             ->execute();
-            // TODO: check if $stmt should be ->execute() like in getByUnique
+        // TODO: check if $stmt should be ->execute() like in getByUnique
     }
 
     public function findUniqueBy($table, array $where)
@@ -42,25 +37,25 @@ trait QueryTrait
         return $this->getByUnique($table, $where);
         // should check for unicity
     }
-    
+
     public function findFirstBy($table, array $where)
     {
         return $this->getByUnique($table, $where);
         // return first result
     }
-    
+
     public function findOneBy($table, array $where)
     {
         return $this->getByUnique($table, $where);
         // not clear, should return first result
     }
-    
+
     public function find($table, array $where)
     {
         return $this->getByUnique($table, $where);
         // should search by id
     }
-    
+
     public function getByUnique($table, array $where)
     {
         $qb = $this->getConnection()->createQueryBuilder();
@@ -90,7 +85,7 @@ trait QueryTrait
         $this->getConnection()->insert($table, $insert);
         // The construct with the array triggers a prepared statement
     }
-    
+
     /*
     public function insert_default_values($table) {
         $this->getConnection()->executeUpdate('INSERT INTO ' . $table . ' DEFAULT VALUES');
@@ -106,7 +101,7 @@ trait QueryTrait
     {
         return $this->updateByUnique($table, $id, $row, $types);
     }
-    
+
     public function updateByUnique($table, array $id, array $row, array $types = [])
     { // TODO: assert unicity of index
         $qb = $this->getConnection()->createQueryBuilder();
