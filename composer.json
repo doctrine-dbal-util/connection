@@ -6,7 +6,8 @@
     "homepage": "https://github.com/doctrine-dbal-util/connection",
     "license": "MIT",
     "authors": [
-        {"name": "Jean-Bernard Addor"}
+        {"name": "Jean-Bernard Addor"},
+        {"name": "Community", "homepage": "https://github.com/doctrine-dbal-util/connection"}
     ],
     "require": {
         "php": ">=5.4",
