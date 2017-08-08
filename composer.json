@@ -1,0 +1,30 @@
+{
+    "name": "doctrine-dbal-util/connection",
+    "type": "library",
+    "description": "Traits and Methods to Query on a Doctrine DBAL Connection",
+    "keywords": ["dbal", "database", "persistence", "queryobject", "snowyowl"],
+    "homepage": "https://github.com/doctrine-dbal-util/connection",
+    "license": "MIT",
+    "authors": [
+        {"name": "Jean-Bernard Addor"}
+    ],
+    "require": {
+        "php": ">=5.4",
+        "doctrine/dbal": "^2.0"
+    },
+    "require-dev": {
+    },
+    "suggest": {
+    },
+    "autoload": {
+        "psr-4": { "DbalUtil\\Connection\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    },
+    "archive": {
+        "exclude": ["!vendor", "tests", "*phpunit.xml", ".travis.yml", "build.xml", "build.properties", "composer.phar"]
+    }
+}
