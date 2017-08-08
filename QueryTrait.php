@@ -114,14 +114,14 @@ trait QueryTrait
                 array_map([$qb, 'createNamedParameter'], array_values($id))
             )
         ));
-        foreach ($row as $key => $value):
+        foreach ($row as $key => $value) {
             $qb->set($key, ':'.$key);
             if (array_key_exists($key, $types)) {
                 $qb->setParameter(':'.$key, $value, $types[$key]);
             } else {
                 $qb->setParameter(':'.$key, $value);
             }
-        endforeach;
+        }
         $qb->execute();
     }
 
