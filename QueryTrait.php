@@ -76,11 +76,10 @@ trait QueryTrait
         if ($stmt->execute()) {
             while ($row = $stmt->fetch()) {
                 return $row;
-            } // while
+            }
         } else {
-            die('tbS8k: '.basename(__FILE__));
-            // TODO
-        } // if
+            die('tbS8k: '.basename(__FILE__)); // TODO
+        }
         // TODO: check if something should be ended or close...
     }
 
