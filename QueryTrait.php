@@ -154,7 +154,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function($s) {return 'b.'.$s;}, array_keys($unique)),
+                    array_map(function ($s) {return 'b.'.$s;}, array_keys($unique)),
                     array_map([$qb, 'createNamedParameter'], array_values($unique))
                 )
             ))
@@ -171,20 +171,20 @@ trait QueryTrait
         foreach ($sqlTree as $key => $value):
             /// dump($key, $value);
             switch ($key):
-                case "select":
+                case 'select':
                     $qb->select($value);
                     break;
-                case "from":
+                case 'from':
                     if (1 != count($value)):
                         0/0; // TODO
                     endif;
                     $qb->from(array_keys($value)[0], array_values($value)[0]);
                     break;
-                case "where":
+                case 'where':
                     0/0; // TODO
                     break;
-                case "join":
-                case "innerJoin":
+                case 'join':
+                case 'innerJoin':
                     foreach ($value as    $key => $jvalue):
                         if (1 != count($jvalue['table'])):
                             0/0; // TODO
@@ -217,7 +217,7 @@ trait QueryTrait
                     'and' => [
                         '=' => [
                             'base.'.$base_id,
-                            'link.'.$link_base_id
+                            'link.'.$link_base_id,
                         ],
                         '<' => [1, 2],
                     ],
@@ -235,7 +235,7 @@ trait QueryTrait
                             'on' => [
                                 '=' => [
                                     'base.'.$base_id,
-                                    'link.'.$link_base_id
+                                    'link.'.$link_base_id,
                                 ]
                             ]
                         ],
@@ -247,7 +247,7 @@ trait QueryTrait
                         'on' => [
                             '=' => [
                                 'base.'.$base_id,
-                                'link.'.$link_base_id
+                                'link.'.$link_base_id,
                             ]
                         ]
                     ],
@@ -258,7 +258,7 @@ trait QueryTrait
                     'on' => [
                         '=' => [
                             'base.'.$base_id,
-                            'link.'.$link_base_id
+                            'link.'.$link_base_id,
                         ]
                     ]
                 ],
@@ -281,14 +281,14 @@ trait QueryTrait
                 ],
                 'innerJoin' => [
                     [
-                        'from'  => 'base',
+                        'from' => 'base',
                         'table' => [$link_table => 'link'],
-                        'on'    => 'base."'.$base_id.'" = link."'.$link_base_id.'"'
+                        'on' => 'base."'.$base_id.'" = link."'.$link_base_id.'"'
                     ],
                     [
-                        'from'  => 'link',
+                        'from' => 'link',
                         'table' => [$distant_table => 'distant'],
-                        'on'    => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
+                        'on' => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
                     ]
                 ],
             ], $qb)
@@ -299,7 +299,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function($s) {return 'distant.'.$s;}, array_keys($where)),
+                    array_map(function ($s) {return 'distant.'.$s;}, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
@@ -326,7 +326,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function($s) {return 'base.'.$s;}, array_keys($where)),
+                    array_map(function ($s) {return 'base.'.$s;}, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ));
@@ -348,7 +348,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_map(function($s) {return 'distant.'.$s;}, array_keys($where)),
+                    array_map(function ($s) {return 'distant.'.$s;}, array_keys($where)),
                     array_map([$qb, 'createNamedParameter'], array_values($where))
                 )
             ))
@@ -369,19 +369,19 @@ trait QueryTrait
                 ],
                 'innerJoin' => [
                     [
-                        'from'  => 'base',
+                        'from' => 'base',
                         'table' => [$more_table => 'more'],
-                        'on'    => 'base."'.$base_more.'" = more."'.$more_id.'"'
+                        'on' => 'base."'.$base_more.'" = more."'.$more_id.'"'
                     ],
                     [
-                        'from'  => 'base',
+                        'from' => 'base',
                         'table' => [$link_table => 'link'],
-                        'on'    => 'base."'.$base_id.'" = link."'.$link_base_id.'"'
+                        'on' => 'base."'.$base_id.'" = link."'.$link_base_id.'"'
                     ],
                     [
-                        'from'  => 'link',
+                        'from' => 'link',
                         'table' => [$distant_table => 'distant'],
-                        'on'    => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
+                        'on' => 'link."'.$link_distant_id.'" = distant."'.$distant_id.'"'
                     ]
                 ],
             ], $qb)
@@ -395,7 +395,7 @@ trait QueryTrait
             ->where(call_user_func_array([$qb->expr(), 'andX'],
                 array_map(
                     [$qb->expr(), 'eq'], 
-                    array_merge([],array_map(function($s) {return 'distant.'.$s;}, array_keys($where))),
+                    array_merge([],array_map(function ($s) {return 'distant.'.$s;}, array_keys($where))),
                     array_merge([],array_map([$qb, 'createNamedParameter'], array_values($where)))
                 )
             ))
