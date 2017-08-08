@@ -172,7 +172,7 @@ trait QueryTrait
         // dump($sqlTree);
         foreach ($sqlTree as $key => $value):
             /// dump($key, $value);
-            switch ($key):
+            switch ($key) {
                 case 'select':
                     $qb->select($value);
                     break;
@@ -197,7 +197,7 @@ trait QueryTrait
                     break;
                 // default:
                     // echo "i n'est ni égal à 2, ni à 1, ni à 0";
-            endswitch;
+            }
         endforeach;
         return $qb;
     }
