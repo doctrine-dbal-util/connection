@@ -128,6 +128,7 @@ trait QueryTrait
     public function deleteByUnique($table, array $id)
     { // TODO: assert unicity of index
         $qb = $this->getConnection()->createQueryBuilder();
+
         $qb
             ->delete($table)
             ->where(call_user_func_array([$qb->expr(), 'andX'],
@@ -187,9 +188,9 @@ trait QueryTrait
                 case 'join':
                 case 'innerJoin':
                     foreach ($value as    $key => $jvalue):
-                        if (1 != count($jvalue['table'])):
+                        if (1 != count($jvalue['table'])) {
                             0/0; // TODO
-                        endif;
+                        }
                         // dump          ($jvalue['from'], array_keys($jvalue['table'])[0], array_values($jvalue['table'])[0], $jvalue['on']);
                         $qb->innerJoin($jvalue['from'], array_keys($jvalue['table'])[0], array_values($jvalue['table'])[0], $jvalue['on']);
                     endforeach;
