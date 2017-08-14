@@ -18,7 +18,7 @@
     "suggest": {
     },
     "autoload": {
-        "psr-4": { "DbalUtil\\Connection\\": "" }
+        "psr-4": { "DoctrineDbalUtil\\Connection\\": "" }
     },
     "extra": {
         "branch-alias": {
