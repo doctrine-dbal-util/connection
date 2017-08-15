@@ -7,3 +7,5 @@
 [![Dependency Status](https://www.versioneye.com/php/doctrine-dbal-util:connection/badge)](https://www.versioneye.com/php/doctrine-dbal-util:connection)
 [![Build Status](https://travis-ci.org/doctrine-dbal-util/connection.svg?branch=master)](https://travis-ci.org/doctrine-dbal-util/connection)
 [![Code Coverage](https://scrutinizer-ci.com/g/doctrine-dbal-util/connection/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/doctrine-dbal-util/connection/?branch=master)
+
+Icon: https://material.io/icons/#ic_storage
