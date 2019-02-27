@@ -117,7 +117,7 @@ trait QueryTrait
         ));
         foreach ($row as $key => $value) {
             $qb->set($key, ':'.$key);
-            if (array_key_exists($key, $types)) {
+            if (\array_key_exists($key, $types)) {
                 $qb->setParameter(':'.$key, $value, $types[$key]);
             } else {
                 $qb->setParameter(':'.$key, $value);
